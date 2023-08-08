@@ -1,0 +1,19 @@
+{
+  "name": "Haskell (Community)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "haskell.manageHLS": "GHCup"
+      },
+      "extensions": ["haskell.haskell"]
+    }
+  },
+  "remoteUser": "vscode",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/advent-of-code-2022"
+}
