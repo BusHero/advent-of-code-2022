@@ -34,9 +34,9 @@ test5 = TestCase $ do
 
 adventOvCodeTest = TestCase $ do
   let strList = ["1000", "2000", "3000", "", "4000", "", "5000", "6000", "", "7000", "8000", "9000", "", "10000"]
-  let expectedResult = 24000
+  let expectedResult = 45000
   assertEqual "Sum of integers" expectedResult (getMaxCalories strList)
 
-tests = TestList [test1, test2, test3, test4, test5, adventOvCodeTest]
+tests = TestList [adventOvCodeTest]
 
 main = runTestTT tests

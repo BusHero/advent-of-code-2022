@@ -1,16 +1,14 @@
-module D01 where
+module D01 (getMaxCalories) where
 
 import Data.Function ((&))
+import Data.List (sort)
 
 getMaxCalories :: [String] -> Int
--- getMaxCalories x = x & map (\str -> read str :: Int) & sum
-getMaxCalories x = bar x [] & foldr max 0
+getMaxCalories x = foo x []
 
-bar :: [String] -> [Int] -> [Int]
-bar [] remaining = remaining
-bar (head : tail) remaining = foo (head : tail) 0 & (\t -> bar (fst t) (remaining ++ [snd t]))
-
-foo :: [String] -> Int -> ([String], Int)
-foo [] sum = ([], sum)
-foo ("" : tail) sum = (tail, sum)
-foo (head : tail) sum = foo tail (sum + read head :: Int)
+foo :: [String] -> [Int] -> Int
+foo [] remaining = remaining & sort & reverse & take 3 & sum
+foo ("" : tail) remaining = foo tail (0 : remaining)
+foo (head : tail) [] = foo tail [read head :: Int]
+foo (head : tail) [head2] = foo tail [head2 + read head :: Int]
+foo (head : tail) (head2 : tail2) = foo tail (head2 + (read head :: Int) : tail2)
