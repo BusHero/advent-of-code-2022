@@ -1,0 +1,20 @@
+cabal-version:      2.4
+name:               d01
+version:            0.1.0.0
+author:             Petru Cervac
+maintainer:         petru.cervac@gmail.com
+extra-source-files: CHANGELOG.md
+
+library d01-lib
+    exposed-modules: D01
+    hs-source-dirs: lib
+    build-depends:    base ^>=4.16.4.0
+    default-language: Haskell2010
+
+test-suite d01-tests
+    type: exitcode-stdio-1.0
+    extensions: ImportQualifiedPost
+    main-is: d01Tests.hs
+    hs-source-dirs: tests
+    build-depends: base ^>=4.16.4.0, HUnit ^>=1.6 , d01-lib
+    default-language: Haskell2010
