@@ -1,0 +1,28 @@
+cabal-version:      2.4
+name:               d02
+version:            0.1.0.0
+author:             Petru Cervac
+maintainer:         petru.cervac@gmail.com
+extra-source-files: CHANGELOG.md
+
+library d02-lib
+    exposed-modules: D02
+    hs-source-dirs: lib
+    build-depends:    base ^>=4.16.4.0
+    default-language: Haskell2010
+
+executable main-exe
+    main-is: Main.hs
+    hs-source-dirs: app
+    ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+    build-depends: base >=4.7 && <5, d02-lib
+    default-language: Haskell2010
+
+
+test-suite d02-tests
+    type: exitcode-stdio-1.0
+    extensions: ImportQualifiedPost
+    main-is: d02Tests.hs
+    hs-source-dirs: tests
+    build-depends: base ^>=4.16.4.0, HUnit ^>=1.6 , d02-lib
+    default-language: Haskell2010
