@@ -14,16 +14,29 @@ foo = map ((\[[first], [second]] -> (first, second)) . words)
 
 getMatchResult :: (Char, Char) -> Int
 getMatchResult (first, second) =
-  (charToHand first, charToHand second)
-    & (\hands -> (uncurry getWinStatus hands & getWinPoints) + getComboPoints (snd hands))
+  (charToHand first, charToResult second)
+    & (\hands -> (uncurry getRightHand hands & getComboPoints) + getWinPoints (snd hands))
+
+charToResult :: Char -> Result
+charToResult 'X' = Loss
+charToResult 'Y' = Draw
+charToResult 'Z' = Win
 
 charToHand :: Char -> Hands
 charToHand 'A' = Rock
-charToHand 'X' = Rock
 charToHand 'B' = Paper
-charToHand 'Y' = Paper
 charToHand 'C' = Scrissors
-charToHand 'Z' = Scrissors
+
+getRightHand :: Hands -> Result -> Hands
+getRightHand Rock Loss = Scrissors
+getRightHand Rock Draw = Rock
+getRightHand Rock Win = Paper
+getRightHand Paper Loss = Rock
+getRightHand Paper Draw = Paper
+getRightHand Paper Win = Scrissors
+getRightHand Scrissors Loss = Paper
+getRightHand Scrissors Draw = Scrissors
+getRightHand Scrissors Win = Rock
 
 getWinPoints :: Result -> Int
 getWinPoints Win = 6
